@@ -1,3 +1,9 @@
+# System stuff
+.DS_Store
+
+# Examples
+*.example
+
 # Logs
 logs
 *.log

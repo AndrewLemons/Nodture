@@ -1,0 +1,10 @@
+.photogrid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.photogrid img {
+    margin: 5px;
+    background-color: white;
+}

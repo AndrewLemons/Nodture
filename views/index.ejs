@@ -1,0 +1,48 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="/js/vue.js"></script>
+    <script src="/js/axios.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="/css/photogrid.css">
+</head>
+
+<body>
+    <h1>Nodture</h1>
+    <ul class="topbar">
+        <li><a href="/upload">Upload</a></li>
+    </ul>
+    <div id="app" class="photogrid">
+        <img v-for="photo in photos" v-bind:src="'/photos/' + photo" loading="lazy"  v-bind:alt="photo" v-bind:style="'height: ' + (windowWidth / images) + 'px;'">
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    photos: null,
+                    windowWidth: window.innerWidth,
+                    images: 4
+                }
+            },
+            mounted() {
+                axios
+                    .get('/photos')
+                    .then(response => (this.photos = response.data)),
+                this.$nextTick(() => {
+                    window.addEventListener('resize', this.onResize);
+                })
+            },
+            methods: {  
+                onResize() {
+                    this.windowWidth = window.innerWidth
+                    this.images = Math.ceiling(this.windowWidth / 100);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
