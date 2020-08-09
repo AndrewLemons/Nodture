@@ -1,8 +1,8 @@
 # System stuff
 .DS_Store
 
-# Examples
-*.example
+# Config
+config.js
 
 # Logs
 logs

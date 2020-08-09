@@ -1,0 +1,12 @@
+var config = {};
+config.mysql = {};
+
+config.port = '80';
+config.storageDir = '/location';
+
+config.mysql.host = 'localhost';
+config.mysql.user = 'user';
+config.mysql.pwd = 'password';
+config.mysql.db = 'nodture';
+
+module.exports = config;
