@@ -1,10 +1,35 @@
-.photogrid {
+.grid {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
+
+    margin: 10px;
 }
 
-.photogrid img {
-    margin: 5px;
-    background-color: white;
+.photo {
+    width: 100px;
+    height: 100px;
+
+    margin-top: 10px;
+}
+
+@media screen and (min-width: 600px) {
+    .photo {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+@media screen and (min-width: 750px) {
+    .photo {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .photo {
+        width: 250px;
+        height: 250px;
+    }
 }

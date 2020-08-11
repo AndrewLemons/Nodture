@@ -1,0 +1,81 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link href="/fa/css/solid.min.css" rel="stylesheet">
+    <link href="/fa/css/fontawesome.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: black;
+            margin: 0px;
+
+            overscroll-behavior: none;
+        }
+        .imgbox {
+            display: grid;
+            height: 100%;
+        }
+        .center-fit {
+            max-width: 90%;
+            max-height: 90vh;
+            margin: auto;
+        }
+        .buttons {
+            position: fixed;
+            display: flex;
+            box-sizing: border-box;
+            justify-content: space-between;
+            align-content: center;
+            padding: 10px;
+            width: 100%;
+        }
+        a {
+            background-color: #00000000;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 25px;
+
+            padding: 5px;
+
+            transition: background .5s;
+        }
+        a:hover {
+            background-color: #ffffff55;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="buttons">
+        <a href="/"><i class="fas fa-arrow-left"></i></a>
+        <div>
+            <a href="/photos/<%- uuid %>/file"><i class="fas fa-download"></i></a>
+            <a onclick="deletePhoto()"><i class="fas fa-trash-alt"></i></a>
+        </div>
+    </div>
+    <div class="imgbox">
+        <img class="center-fit" src="/photos/<%- uuid %>/file">
+    </div>
+
+    <script>
+        function deletePhoto() {
+            const request = new XMLHttpRequest();
+
+            request.addEventListener("load", function (event) {
+                window.location.href = "/";
+            });
+
+            request.addEventListener("timeout", function (event) {
+                alert("Error, could not delete photo.");
+            });
+
+            request.open("DELETE", "/photos/<%- uuid %>");
+            request.send();
+        }
+    </script>
+</body>
+
+</html>

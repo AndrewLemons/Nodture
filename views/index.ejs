@@ -3,42 +3,59 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <script src="/js/uploader.js"></script>
+    
     <script src="/js/vue.js"></script>
     <script src="/js/axios.js"></script>
-    
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
+
+    <link href="/fa/css/solid.min.css" rel="stylesheet">
+    <link href="/fa/css/fontawesome.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
     <link rel="stylesheet" type="text/css" href="/css/photogrid.css">
+    <link rel="stylesheet" type="text/css" href="/css/upload-popup.css">
 </head>
 
 <body>
-    <h1>Nodture</h1>
-    <ul class="topbar">
-        <li><a href="/upload">Upload</a></li>
-    </ul>
-    <div id="app" class="photogrid">
-        <img v-for="photo in photos" v-bind:src="'/photos/' + photo" loading="lazy"  v-bind:alt="photo" v-bind:style="'height: ' + (windowWidth / images) + 'px;'">
+    <div id="popup-holder" style="visibility: hidden; opacity: 0;">
+        <div id="popup">
+            <form id="uploader">
+                <input type="file" name="images" accept=".png,.jpeg" value="Photos" multiple><br>
+                <div class="upload-options">
+                    <button type="submit" onclick="closePopup()"><i class="fas fa-check"></i>Upload</button>
+                    <button type="button" onclick="closePopup()"><i class="fas fa-times"></i>Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <header>
+        <p>Nodture</p>
+        <button onclick="openPopup()"><i class="fas fa-file-upload"></i>Upload</button>
+    </header>
+    <div id="app">
+        <div class="grid">
+            <a class="photo" v-for="photo in photos" v-bind:href="'/photos/' + photo" v-bind:style="'background:url(/photos/' + photo + '/file);background-position: center center;background-size: cover;'"></a>
+        </div>
     </div>
     <script>
-        new Vue({
+        var vue = new Vue({
             el: '#app',
             data() {
                 return {
-                    photos: null,
-                    windowWidth: window.innerWidth,
-                    images: 4
+                    photos: null
                 }
             },
             mounted() {
                 axios
                     .get('/photos')
-                    .then(response => (this.photos = response.data)),
-                this.$nextTick(() => {
-                    window.addEventListener('resize', this.onResize);
-                })
+                    .then(response => (this.photos = response.data))
             },
-            methods: {  
-                onResize() {
-                    this.windowWidth = window.innerWidth
-                    this.images = Math.ceiling(this.windowWidth / 100);
+            methods: {
+                reloadPhotos: function () {
+                    axios
+                        .get('/photos')
+                        .then(response => (this.photos = response.data));
                 }
             }
         })
