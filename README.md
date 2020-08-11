@@ -1,5 +1,5 @@
 # Nodture 
-<img src='https://img.shields.io/github/last-commit/andrewlemons/nodture?style=flat-square'> <img src='https://img.shields.io/github/languages/top/andrewlemons/nodture?style=flat-square'> <image src='https://img.shields.io/github/license/andrewlemons/nodture?style=flat-square'><br>
+<img src="https://img.shields.io/github/package-json/v/andrewlemons/nodture?style=flat-square"> <img src='https://img.shields.io/github/last-commit/andrewlemons/nodture?style=flat-square'> <img src='https://img.shields.io/github/languages/top/andrewlemons/nodture?style=flat-square'> <image src='https://img.shields.io/github/license/andrewlemons/nodture?style=flat-square'><br>
 Nodture is a simple, self-hosted, photo storage solution. Its goal is to be a privacy-conscious alternative to services like Google Photos.
 
 ## Install
@@ -13,7 +13,7 @@ All instructions assume that you have Git, Node JS, NPM, and MySQL installed. Pl
   `mysql> EXIT;`
   
 2. Install Nodture.  
-  `$ cd ~`  
+  `$ cd ~` *This can be anywhere you would like*  
   `$ git clone https://github.com/AndrewLemons/Nodture.git`  
   `$ cd Nodture`  
   `$ npm install`
@@ -29,3 +29,11 @@ All instructions assume that you have Git, Node JS, NPM, and MySQL installed. Pl
   `$ sudo pm2 save`  
   
 4. Open nodture by visiting `http://IP:PORT/`. Have fun!
+
+## Update
+To update, simply pull from github and restart the server on PM2.  
+1. `$ cd ~/Nodture` *Or wherever you placed Nodture*  
+
+2. `$ git pull`  
+
+3. `$ sudo pm2 restart server.js`  
