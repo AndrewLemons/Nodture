@@ -1,0 +1,14 @@
+body {
+    background-color: black;
+}
+
+.imgbox {
+    display: grid;
+    height: 100%;
+}
+
+.center-fit {
+    max-width: 90%;
+    max-height: 90vh;
+    margin: auto;
+}

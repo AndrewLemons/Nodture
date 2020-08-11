@@ -1,41 +1,40 @@
 <html>
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%- include('partials/head') %>
 
-    <script src="/js/uploader.js"></script>
-    
-    <script src="/js/vue.js"></script>
-    <script src="/js/axios.js"></script>
-    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
-
-    <link href="/fa/css/solid.min.css" rel="stylesheet">
-    <link href="/fa/css/fontawesome.min.css" rel="stylesheet">
-
-    <link rel="stylesheet" type="text/css" href="/css/main.css">
-    <link rel="stylesheet" type="text/css" href="/css/photogrid.css">
-    <link rel="stylesheet" type="text/css" href="/css/upload-popup.css">
+    <link rel="stylesheet" type="text/css" href="/css/pages/index.css">
 </head>
 
 <body>
     <div id="popup-holder" style="visibility: hidden; opacity: 0;">
         <div id="popup">
-            <form id="uploader">
-                <input type="file" name="images" accept=".png,.jpeg" value="Photos" multiple><br>
-                <div class="upload-options">
-                    <button type="submit" onclick="closePopup()"><i class="fas fa-check"></i>Upload</button>
-                    <button type="button" onclick="closePopup()"><i class="fas fa-times"></i>Cancel</button>
+            <form id="upload-form">
+                <input type="file" name="photos" accept=".png,.jpeg" value="Photos" multiple><br>
+                <div class="upload-buttons">
+                    <button type="button" onclick="closePopup(); uploadPhotos('upload-form');"">
+                        <i class=" fas fa-check"></i>
+                        Upload
+                    </button>
+                    <button type="button" onclick="closePopup()">
+                        <i class="fas fa-times"></i>
+                        Cancel
+                    </button>
                 </div>
             </form>
         </div>
     </div>
-    <header>
-        <p>Nodture</p>
-        <button onclick="openPopup()"><i class="fas fa-file-upload"></i>Upload</button>
+    <header class="topbar">
+        <p class="topbar-item">Nodture</p>
+        <button class="topbar-item" onclick="openPopup()">
+            <i class="fas fa-file-upload"></i>
+            Upload
+        </button>
     </header>
     <div id="app">
         <div class="grid">
-            <a class="photo" v-for="photo in photos" v-bind:href="'/photos/' + photo" v-bind:style="'background:url(/photos/' + photo + '/file);background-position: center center;background-size: cover;'"></a>
+            <a class="photo" v-for="photo in photos" v-bind:href="'/photos/' + photo"
+                v-bind:style="'background:url(/api/photos/' + photo + ');background-position: center center;background-size: cover;'"></a>
         </div>
     </div>
     <script>
@@ -48,17 +47,27 @@
             },
             mounted() {
                 axios
-                    .get('/photos')
+                    .get('/api/photos')
                     .then(response => (this.photos = response.data))
             },
             methods: {
                 reloadPhotos: function () {
                     axios
-                        .get('/photos')
+                        .get('/api/photos')
                         .then(response => (this.photos = response.data));
                 }
             }
         })
+
+        function closePopup() {
+            document.getElementById("popup-holder").style.visibility = "hidden";
+            document.getElementById("popup-holder").style.opacity = "0";
+        }
+
+        function openPopup() {
+            document.getElementById("popup-holder").style.visibility = "visible";
+            document.getElementById("popup-holder").style.opacity = "1";
+        }
     </script>
 </body>
 
