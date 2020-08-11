@@ -1,0 +1,28 @@
+<html>
+
+<head>
+    <%- include('partials/head') %>
+    
+    <link rel="stylesheet" type="text/css" href="/css/pages/preview.css">
+</head>
+
+<body>
+    <div class="topbar">
+        <button type="button" class="inverse" onclick="window.location.href='/';">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <div class="topbar-holder">
+            <button class="inverse" type="button" onclick="downloadPhoto('<%- uuid %>')">
+                <i class="fas fa-download"></i>
+            </button>
+            <button class="inverse" type="button" onclick="deletePhoto('<%- uuid %>', '../')">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+        </div>
+    </div>
+    <div class="imgbox">
+        <img class="center-fit" src="/api/photos/<%- uuid %>">
+    </div>
+</body>
+
+</html>

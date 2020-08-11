@@ -24,17 +24,15 @@ app.set('view engine', 'ejs'); // Use EJS renderer
 app.use(express.static('public')); // Use public as static dir
 
 // Routes
-var upload = require('./routes/upload');
-app.use('/upload', upload);
-var photos = require('./routes/photos');
-app.use('/photos', photos);
+var apiRoute = require('./routes/api');
+app.use('/api', apiRoute);
+var photosRoute = require('./routes/photos');
+app.use('/photos', photosRoute);
 
-// Index
+// Redirect '/' to the actual index '/photos'
 app.get('/', (req, res) => {
-    res.render('index');
+    res.status(301).redirect('/photos'); // Redirect
 });
 
 // Start the server
-app.listen(config.port, () => {
-    console.log(`Nodture running on port ${config.port}`);
-});
+app.listen(config.port);
