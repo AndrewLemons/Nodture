@@ -2,11 +2,11 @@ const express = require('express');
 const formidable = require('formidable');
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
-var config = require('../config');
-var db = require('../database');
+const config = require('../config');
+const db = require('../database');
 
 // Setup express
-var router = express.Router();
+const router = express.Router();
 
 // API status
 router.get('/', (req, res) => {
@@ -87,7 +87,7 @@ function savePhoto(path, type) {
     }
 
     // Save the photo to db and file
-    var uuid = uuidv4();
+    const uuid = uuidv4();
     fs.renameSync(path, `${config.storageDir}/photos/${uuid}`);
     db.query(`INSERT INTO photos (uuid, type) VALUES ('${uuid}', '${type}');`);
 

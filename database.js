@@ -2,7 +2,7 @@ const mysql = require('mysql');
 const config = require('./config');
 
 // Create the db connection
-var db = mysql.createConnection({
+const db = mysql.createConnection({
     host: config.mysql.host,
     user: config.mysql.user,
     password: config.mysql.pwd,

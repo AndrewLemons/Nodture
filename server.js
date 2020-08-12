@@ -1,11 +1,12 @@
 const express = require('express');
+const helmet = require('helmet');
 const fs = require('fs');
 
 // Config
 const config = require('./config');
 
 // Database
-var db = require('./database');
+const db = require('./database');
 
 // Create required tables if they don't already exist
 db.query('CREATE TABLE IF NOT EXISTS photos (id INT AUTO_INCREMENT PRIMARY KEY, uuid TEXT NOT NULL, type TEXT NOT NULL)');
@@ -25,9 +26,9 @@ app.use(helmet()); // Use Helmet
 app.use(express.static('public')); // Use public as static dir
 
 // Routes
-var apiRoute = require('./routes/api');
+const apiRoute = require('./routes/api');
 app.use('/api', apiRoute);
-var photosRoute = require('./routes/photos');
+const photosRoute = require('./routes/photos');
 app.use('/photos', photosRoute);
 
 // Redirect '/' to the actual index '/photos'
