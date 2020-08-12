@@ -21,6 +21,7 @@ if (!fs.existsSync(`${config.storageDir}/photos`)) {
 // Create the Express app
 const app = express();
 app.set('view engine', 'ejs'); // Use EJS renderer
+app.use(helmet()); // Use Helmet
 app.use(express.static('public')); // Use public as static dir
 
 // Routes
